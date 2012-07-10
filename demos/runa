@@ -1,0 +1,3 @@
+adacomp -v  -nl demolib spath
+adabind -l demolib
+adaexec -l demolib

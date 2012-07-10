@@ -1,0 +1,142 @@
+
+
+1. INTRODUCTION.
+
+This is the README file from the distribution of Ada/Ed version
+1.11.2, an Ada interpreter for Unix-based machines.  The distribution
+consists of one directory packaged into a compressed tar file available
+through anonymous ftp on cs.nyu.edu (128.122.140.24) in the directory
+pub/adaed.  The distribution contains all sources, documentation, the
+Makefile, and some shell scripts used in building Ada/Ed.  The ftp
+directory contains another distribution for 386/DOS machines.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Purpose License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version. See relevant excerpts below.
+
+Ada/Ed is a translator-interpreter for Ada. It is intended as a teaching
+tool, and does not have the capacity, performance,  or robustness of 
+commercial Ada compilers. Ada/Ed was developed at New York University, as
+part of a long-range project in language definition and software prototyping. 
+The project produced the first validated translator for Ada, in the form of
+an executable definition of the language written in SETL. The SETL system
+served as design document and prototype for the C version being released today.
+
+Ada/Ed was last validated under version 1.7 of the ACVC tests. Therefore it is
+not currently a validated Ada system, and users can expect to find  small
+discrepancies between Ada/Ed and currently validated compilers. 
+
+Apart from the 100-odd tests of ACVC 1.11 that Ada/Ed currently fails, the
+major deficiency of the system is that, being an interpreter, it does not 
+implement most representation clauses, and thus does not support systems 
+programming close to the machine level. 
+
+We trust that even with these limitations, Ada/Ed will be of use to the
+Ada community at large: students, educators, user, and implementors. The 
+sources of the system should be of interest to compiler writers, and we hope 
+that they will encourage the construction of software tools to make the system
+more usable and polished. The NYUADA project does not have the resources to
+promise regular new maintenance releases of the software, but will do its
+best to keep track of reported errors, workarounds, and fixes. We will also
+produce at irregular intervals design notes and additional documentation on
+the front-end of the system.  We  urge users to send comments, corrections 
+and bug reports (reduced to their simplest form!)  to:   adaed@cs.nyu.edu
+ 
+
+All users of Ada/Ed are urged to register themselves by
+sending email to the above address, or to the NYUADA project, New
+York University, 251 Mercer Street, New York, NY 10012. This will allow us to
+notify users of updates and new releases of the system.
+
+
+2. (UN) WARRANTY
+
+This software is release 1.11.2 of the Ada/Ed system.
+It is distributed absolutely WITHOUT ANY WARRANTY; without even the implied 
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+To receive a copy of the GNU General Public License write to the Free
+Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139.
+
+The following is an excerpt from the GNU General Public License concerning
+warranties:
+
+Because the program is licensed free of charge, there is no warranty
+for the program, to the extent permitted by applicable law.  Except when
+otherwise stated in writing the copyright holders and/or other parties
+provide the program "as is" without warranty of any kind, either expressed
+or implied, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.  The entire risk as
+to the quality and performance of the program is with you.  Should the
+program prove defective, you assume the cost of all necessary servicing,
+repair or correction.
+
+In no event unless required by applicable law or agreed to in writing
+will any copyright holder, or any other party who may modify and/or
+redistribute the program as permitted above, be liable to you for damages,
+including any general, special, incidental or consequential damages arising
+out of the use or inability to use the program (including but not limited
+to loss of data or data being rendered inaccurate or losses sustained by
+you or third parties or a failure of the program to operate with any other
+programs), even if such holder or other party has been advised of the
+possibility of such damages.
+
+
+3. INSTALLATION
+
+
+The directory contains C language source files, a Makefile, shell scripts
+used in building the system, and documentation.
+
+To install:
+
+    1.  Edit the Makefile.  The installation of Ada/Ed puts top level
+        executables in a directory that should be on users' PATH, and
+        other executables called by the driver plus predefined ada
+        library files are placed into a library directory.  The makefile
+        macros BINDIR and LIBDIR should be defined to name these
+        directories.  The makefile comes with gcc specified as the
+        C compiler, which is the only one that it has actually been
+        built with.  An ANSI C compiler is certainly needed.  Edit
+        MANDIR for the location of man pages.
+
+        Older versions of gcc do not recognize the -O2 option of gcc. 
+        Simply change it to -O in this case.  
+
+        Machine specific instructions:
+
+        Decstation running ULTRIX:
+            Replace "LFLAGS=-lg" with "LFLAGS="
+
+        VAX running BSD 4.3 UNIX
+            Replace "include Makeext" by including the entire file "Makeext" 
+            at that point in the Makefile with an editor.
+ 
+        Silicon Graphics IRIS running IRIX
+            Replace "CC= gcc" with "CC= cc"
+            Replace "LFLAGS=-lg" with "LFLAGS="
+            The "install" command should be changed to "cp"
+            Note: if the SGI_CC environment variable is set, CFLAGS should 
+            also contain -xansi to override the default which might be some 
+            other mode. We didn't try to compile this target with gcc.
+
+        Sun3 running SunOS
+        Sunsparcstation running SunOS
+        RS6000/AIX
+            Nothing special needs to be done when gcc is used.
+ 
+
+    2.  For targets other than the above (which are already set properly) 
+        you need to look at the file config.h and determine if the symbols 
+        specifying word length and alignment will be set properly.
+
+    3.  Build it. 'make install' will do everything; otherwise do
+        'make', 'make predef', and 'make install'.
+
+    4.  Read the man pages for adaed and enjoy it.
+
+Copyright C 1986-1992 New York University
+
+

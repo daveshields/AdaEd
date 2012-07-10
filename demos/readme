@@ -1,0 +1,63 @@
+THe following is a list of the scripts necessary to run each demo program.
+Simple type the corresponding runX file for the demo you want to execute.
+In general the list is start with several simple programs working its
+way to more interesting and complex programs towards the end of the list.
+
+test.ada 	-- run1
+a simple Hello World program to test whether the compiler is working
+
+en.ada   	-- run2
+simple enumeration io, etc.
+
+factr.ada 	-- run3
+simple factorial program
+
+primes.ada	-- run4
+simple primes
+
+pi.ada		-- run5
+simple pi program
+
+genqsort.ada	-- run6
+generic quicksort 
+
+dates3.ada	-- run7
+task.ada	-- run8
+producer-consumer program
+
+phil.ada	-- run9
+NYU's dining philospher's
+
+spath.ada	-- runa
+parallel shortest-path finder
+
+list.ada	-- runb
+topsort.ada	-- runb
+concord.ada	-- runb
+topological sort and concordance programs
+
+random.ada	-- runc
+semaphor.ada	-- runc
+intio.ada	-- runc
+screenio.ada	-- runc
+maze.ada	-- runc
+new_maze.ada	-- runc
+draw.ada	-- runc
+hilbert.ada	-- runc
+maze program and hilbert curves
+
+diners1.ada	-- rund
+diners2.ada	-- rund
+Mike Feldman's dining philosophers (see diners.doc)
+
+pager2.ada	-- rune
+Rich Conn's pager program (can be used with diners1.ada & diners2.ada)
+see pager.doc
+
+primes3.ada	-- runf
+parallel primes generator
+
+math.ads       -- rung
+math.adb       -- rung
+roots.ada      -- rung
+Example of using pragma interface to create a math library

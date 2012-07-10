@@ -1,0 +1,98 @@
+
+Portable Dining Philosophers
+
+Michael B. Feldman
+Dept. of Electrical Engineering and Computer Science
+The George Washington University
+Washington, DC 20052
+
+(202) 994-5253
+mfeldman@seas.gwu.edu
+
+copyright 1991, Michael B. Feldman
+These programs may be freely copied, distributed, and modified 
+for educational purposes but not for profit. If you modify or enhance 
+the program (for example, to use other display systems), please send
+me a copy of the modified code, either on diskette or by e-mail.
+
+This system is an elaborate implementation of Edsger Dijkstra's
+famous Dining Philosophers, a classical demonstration of deadlock
+problems in concurrent programming.
+
+This distribution consists of four files in addition to the one you
+are reading.
+
+File 2 is the line-by-line version of Diners, with all the compilation
+units concatenated into a single ASCII file, using Richard Conn's
+Pager2 program (see below). All the units are in the correct compilation
+order, so a single command to your Ada compiler will compile the system
+correctly. You need only to compile it, link the main program (diners),
+and enjoy the action.
+
+The following units are included in this file:
+
+ io_libs.ada -- 10 Lines
+ random.ads -- 17 Lines
+ chop.ads -- 8 Lines
+ phil.ads -- 14 Lines
+ room.ads -- 17 Lines
+ diners.ada -- 9 Lines
+ random.adb -- 67 Lines
+ chop.adb -- 18 Lines
+ phil.adb -- 50 Lines
+ roomline.adb -- 84 Lines
+
+File 3 contains the necessary units to build the simple window version of
+Diners. Compile it, re-link the main program, and have fun watching it.
+The file contains the following units:
+
+ screen.ads -- 15 Lines
+ windows.ads -- 75 Lines
+ screen.adb -- 30 Lines
+ windows.adb -- 201 Lines
+ roomwind.adb -- 102 Lines
+
+File 4 contains the Ada sources for Richard Conn's Pager2 system, which
+was used to collect the Ada units from the Diners system. You can compile
+and link this too, if you wish, to form a general-purpose pager program.
+The file contains:
+
+ cli.ads -- 77 Lines
+ cli.adb -- 219 Lines
+ pager2.ada -- 1289 Lines
+
+File 5 contains the documentation for Pager2; it's a straight ASCII file.
+
+If you wish to modify any of the compilation units, you can separate
+them with an editor, or un-page them using Pager2.
+
+The Ada units follow the following naming convention:
+
+.ADS files are package specifications
+.ADB files are package bodies
+.ADA files are main procedures or I/O instantiations
+
+The packages Screen, Windows, and Random are reusable packages, and
+existed before this project was undertaken.
+
+The simple terminal package Screen gives a few screen-handling commands.
+To run the windowing version on an MS-DOS machine, be sure that the
+ANSI.SYS driver is given in your CONFIG.SYS. For machines like IBM
+mainframes and Macintosh microcomputers, you will need to use the line-
+oriented version, as these computers do not usually have ANSI 
+terminal drivers. 
+
+This program has been compiled and executed successfully under more than 
+30 representatives of most of the major Ada compiler families, including
+those from Alsys, DEC, Irvine, Meridian, Rational, RR, TeleSoft, and
+Verdix, on machines from the Apple Macintosh and MS-DOS families to
+IBM and Cray mainframes, and most major workstation families. Diners
+has also been tested using the freely-available AdaEd system from New 
+York University under DOS and Ultrix.
+
+Please let me know of any tests (successful or not) with other compilers.
+I believe that this program is a very useful demonstration of the
+portability of Ada packages and tasking, and would like to know of
+evidence confirming or refuting this belief! Enjoy!
+
+Mike Feldman

@@ -1,0 +1,138 @@
+ADAED
+
+  Appendix_F
+
+    (1)  The form, allowed places, and effect of implementation dependent
+         pragmas.
+
+       NYU Ada/Ed does not recognize any implementation dependent pragmas.
+       The language  defined  pragmas  are  correctly recognized and their
+       legality is checked, but, with the exception of LIST, PRIORITY, and
+       INTERFACE they  have  no  effect  on  the execution of the program. 
+       A warning message  is  generated  to  indicate  that  the  pragma  
+       is ignored by Ada/Ed.
+
+    (2)  The name and the type of every implementation dependent attribute.
+
+       There are no implementation dependent attributes in NYU Ada/Ed.
+
+    (3)  The specification of the package system (see 13.7).
+
+
+             package SYSTEM is
+
+                type SEGMENT_TYPE is new INTEGER range 0..255;
+                type OFFSET_TYPE  is new INTEGER range 0..32767;
+                type ADDRESS is record
+                   SEGMENT: SEGMENT_TYPE := SEGMENT_TYPE'LAST;
+                   OFFSET: OFFSET_TYPE := OFFSET_TYPE'LAST;
+                end record;
+
+   		type NAME    is (ELXSI_BSD, ELXSI_ENIX, PC_DOS, 
+		     		 SUN_UNIX, VAX_UNIX, VAX_VMS) ; 
+
+   		SYSTEM_NAME  : constant NAME := SUN_UNIX;
+
+                STORAGE_UNIT    : constant  :=  8;
+                MEMORY_SIZE     : constant  :=  2**16 - 1;
+
+                -- System Dependent Named Numbers:
+
+                MIN_INT         : constant  :=  -2**31;
+                MAX_INT         : constant  :=  2**31 - 1;
+                MAX_DIGITS      : constant  :=  6;
+                MAX_MANTISSA    : constant  :=  31;
+                FINE_DELTA      : constant  :=  2.0 ** (-30);
+                TICK            : constant  :=  0.01;
+
+                -- Other System Dependent Declarations
+
+                subtype PRIORITY is INTEGER range 0 .. 4;
+
+                SYSTEM_ERROR  :  exception;
+                                -- raised if internal check fails
+
+             end SYSTEM;
+
+
+    (4)  The list of all restrictions on representation clauses (see 13.1).
+
+       NYU Ada/Ed-C supports the representation clauses for SMALL for
+       fixed points specifying powers of 2 and 10.  NYU Ada/Ed-C  supports 
+       no other representation  clauses,  and  a  program containing any
+       instance of any representation clause is  considered to be illegal.
+
+    (5)  The  conventions  used  for  any   implementation-generated  name
+         denoting  implementation-dependent  components (see 13.4).
+
+       NYU Ada/Ed  does  not  provide  any system generated names denoting
+       system   dependent  entities,  since  in  any case,  representation
+       specifications  are not permitted.
+
+    (6)  The interpretation of expressions that appear in address clauses.
+
+       Addresses  in  NYU  Ada/Ed  are  fully  supported. The ADDRESS type
+       defined in the package SYSTEM is a record consisting of two fields.
+       The  first  is  an unsigned byte which contains the segment number.
+       The  second  is  the  offset  within  the  segment,  ranging from 0
+       to 32767.
+
+    (7)  Any restriction on unchecked conversions (see 13.10.2).
+
+       NYU Ada/Ed will correctly recognize and check the validity  of  any
+       use  of unchecked  conversion.  However, any program which executes
+       an  unchecked  conversion  is  considered to be erroneous, and  the
+       exception  PROGRAM_ERROR  will be raised.
+
+    (8)  Any implementation-dependent characteristics of the  input-output
+         packages (see 14).
+
+       A) Temporary files are fully supported. The naming convention is as
+          follows:
+
+          ADATEMP_XXXXL where XXXXX is the Unix process identification and
+          L is a unique letter.
+
+       B) Deletion of files is fully supported.
+
+       C) Only one internal file may be associated  with the same external
+          file (No multiple accessing of files allowed).
+
+       D) File names used in the CREATE and OPEN procedures  are  standard
+          Unix file names.  The  function FORM returns the string given as
+          FORM  parameter  when  a  file  is  created. No system-dependent
+          characteristics  are  associated  with that parameter.
+
+       E) A  maximum  of  20  files  can  be open at any given time during
+          program execution.
+
+       F) The  standard  input file is  stdin; the  standard  output  file
+          is stdout.
+
+       G) SEQUENTIAL_IO  and  DIRECT_IO  support  constrained array types,
+          record  types  without  discriminants  and  record  types  with
+          discriminants with defaults. SEQUENTIAL_IO and DIRECT_IO are not
+          supported for unconstrained types.
+
+       H) I/O on  access types is possible, but  usage  of  access  values
+          read  in  another program execution is erroneous.
+
+       I) Normal termination of the main  program  causes  all  open files
+          to  be closed, and all temporary files to be deleted.
+
+       J) LOW_LEVEL_IO is not supported.
+
+       K) The  form  feed  character  (ASCII.FF)  is  used  as  the  page
+          terminator  indicator.  Its  use as a data element of a file is
+          therefore undefined.
+
+    (9)  The Implementation Limitations.
+
+       The maximum identifier length (number of characters):   120
+       The maximum number of characters in a source line:      120
+       The maximum number of lines in a source file:         32767
+
+       Generic  declarations  and  their corresponding bodies must appear
+       in the same compilation. Subunits of a generic must be part of the
+       same compilation (see 10.3(9)).
+

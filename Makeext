@@ -1,0 +1,144 @@
+0a.o : hdr.h vars.h dbxprots.h dclmapprots.h arithprots.h miscprots.h smiscprots.h setprots.h chapprots.h 
+0b.o : hdr.h vars.h dbxprots.h errmsgprots.h dclmapprots.h miscprots.h smiscprots.h chapprots.h 
+10.o : hdr.h libhdr.h vars.h ifile.h chapprots.h setprots.h smiscprots.h miscprots.h libprots.h libwprots.h dclmapprots.h dbxprots.h errmsgprots.h 
+11.o : hdr.h vars.h smiscprots.h miscprots.h setprots.h errmsgprots.h chapprots.h 
+12a.o : hdr.h vars.h libhdr.h attr.h unitsprots.h errmsgprots.h miscprots.h smiscprots.h setprots.h libprots.h dclmapprots.h nodesprots.h chapprots.h 
+12b.o : hdr.h vars.h libprots.h librprots.h miscprots.h smiscprots.h dclmapprots.h sspansprots.h errmsgprots.h nodesprots.h setprots.h chapprots.h 
+12c.o : hdr.h vars.h attr.h dbxprots.h dclmapprots.h miscprots.h smiscprots.h setprots.h nodesprots.h errmsgprots.h chapprots.h 
+13.o : hdr.h vars.h attr.h setprots.h dclmapprots.h arithprots.h errmsgprots.h miscprots.h smiscprots.h chapprots.h 
+14.o : hdr.h vars.h attr.h errmsgprots.h chapprots.h 
+2.o : hdr.h vars.h libhdr.h dclmapprots.h libprots.h errmsgprots.h miscprots.h smiscprots.h setprots.h chapprots.h 
+3a.o : 3.h attr.h arithprots.h miscprots.h smiscprots.h dclmapprots.h nodesprots.h errmsgprots.h evalprots.h setprots.h chapprots.h 
+3b.o : 3.h attr.h setprots.h dclmapprots.h errmsgprots.h evalprots.h nodesprots.h miscprots.h smiscprots.h chapprots.h 
+4a.o : 4.h attr.h setprots.h evalprots.h errmsgprots.h dclmapprots.h sspansprots.h nodesprots.h miscprots.h smiscprots.h utilprots.h chapprots.h 
+4b.o : 4.h dbxprots.h setprots.h arithprots.h nodesprots.h errmsgprots.h evalprots.h miscprots.h smiscprots.h chapprots.h 
+4c.o : 4.h attr.h setprots.h libprots.h miscprots.h smiscprots.h errmsgprots.h nodesprots.h dclmapprots.h evalprots.h chapprots.h 
+5.o : attr.h hdr.h vars.h setprots.h dclmapprots.h miscprots.h errmsgprots.h dbxprots.h evalprots.h nodesprots.h smiscprots.h chapprots.h 
+6.o : hdr.h libhdr.h vars.h setprots.h dclmapprots.h errmsgprots.h miscprots.h smiscprots.h nodesprots.h utilprots.h chapprots.h libprots.h 
+7.o : hdr.h libhdr.h vars.h setprots.h errmsgprots.h dclmapprots.h libprots.h miscprots.h unitsprots.h nodesprots.h smiscprots.h chapprots.h 
+8.o : hdr.h vars.h attr.h dclmapprots.h errmsgprots.h sspansprots.h nodesprots.h setprots.h miscprots.h smiscprots.h chapprots.h 
+9.o : hdr.h vars.h setprots.h errmsgprots.h miscprots.h smiscprots.h nodesprots.h dclmapprots.h chapprots.h 
+action.o : hdr.h ada.h miscprots.h actionprots.h 
+acttoks.o : config.h 
+adafront.o : hdr.h ada.h ifile.h miscprots.h libfprots.h actionprots.h adaredprots.h prsutilprots.h prserrprots.h adalexprots.h adaprsprots.h vars.h libhdr.h libprots.h librprots.h libwprots.h setprots.h dbxprots.h arithprots.h smiscprots.h chapprots.h dclmapprots.h sspansprots.h 
+adalex.o : hdr.h adalex.h miscprots.h errsprots.h adalexprots.h 
+adared.o : hdr.h vars.h ada.h adared.h nodesprots.h smiscprots.h setprots.h adalexprots.h reduceprots.h ppredefprots.h pspansprots.h prsutilprots.h errsprots.h adaredprots.h 
+aggr.o : hdr.h vars.h gvars.h attr.h miscprots.h setprots.h gutilprots.h gnodesprots.h gmiscprots.h smiscprots.h initobjprots.h expandprots.h aggrprots.h 
+arith.o : config.h miscprots.h arithprots.h 
+axqr.o : config.h ifile.h segment.h slot.h stdlib.h libfprots.h miscprots.h axqrprots.h 
+axqw.o : hdr.h vars.h segment.h gvars.h slot.h ifile.h setprots.h libfprots.h miscprots.h segmentprots.h axqwprots.h 
+blib.o : hdr.h libhdr.h vars.h segment.h gvars.h ops.h type.h ifile.h axqrprots.h genprots.h segmentprots.h ginterprots.h setprots.h bmainprots.h gutilprots.h dclmapprots.h libprots.h libfprots.h librprots.h glibprots.h miscprots.h gmiscprots.h smiscprots.h gnodesprots.h blibprots.h 
+bmain.o : hdr.h vars.h gvars.h libhdr.h segment.h ifile.h slot.h arithprots.h dclmapprots.h readprots.h dbxprots.h initprots.h blibprots.h libprots.h glibprots.h libfprots.h librprots.h libwprots.h g0aprots.h setprots.h miscprots.h gmiscprots.h bmainprots.h 
+
+
+dbg.o : hdr.h vars.h segment.h gvars.h type.h dbgprots.h 
+dbx.o : hdr.h libhdr.h vars.h ifile.h setprots.h arithprots.h sspansprots.h chapprots.h librprots.h miscprots.h smiscprots.h dbxprots.h 
+dclmap.o : hdr.h vars.h miscprots.h dclmapprots.h 
+debug.o : ada.h adalexprots.h reduceprots.h pspansprots.h 
+decl.o : hdr.h vars.h gvars.h ops.h setprots.h maincaseprots.h miscprots.h smiscprots.h segment.h genprots.h typeprots.h statprots.h segmentprots.h exprprots.h gmiscprots.h gutilprots.h axqrprots.h declprots.h 
+errmsg.o : hdr.h ada.h hdr.h vars.h miscprots.h chapprots.h smiscprots.h sspansprots.h errmsgprots.h 
+errs.o : hdr.h ada.h vars.h ifile.h libfprots.h pspansprots.h adalexprots.h errsprots.h 
+eval.o : hdr.h vars.h attr.h arithprots.h setprots.h errmsgprots.h nodesprots.h machineprots.h sspansprots.h chapprots.h miscprots.h smiscprots.h evalprots.h 
+expand.o : hdr.h libhdr.h vars.h gvars.h attr.h slot.h segment.h setprots.h langprots.h initprots.h initobjprots.h dbxprots.h miscprots.h utilprots.h glibprots.h readprots.h libprots.h arithprots.h librprots.h gnodesprots.h gmiscprots.h gutilprots.h aggrprots.h chapprots.h smiscprots.h gmainprots.h expandprots.h 
+expand2.o : hdr.h libhdr.h vars.h gvars.h attr.h gmainprots.h setprots.h miscprots.h gnodesprots.h gutilprots.h gmiscprots.h initobjprots.h arithprots.h chapprots.h smiscprots.h expandprots.h 
+expr.o : hdr.h vars.h segment.h gvars.h attr.h ops.h type.h namprots.h segmentprots.h genprots.h miscprots.h maincaseprots.h setprots.h typeprots.h gutilprots.h arithprots.h gmiscprots.h smiscprots.h chapprots.h axqrprots.h exprprots.h 
+farith.o : config.h int.h ivars.h intbprots.h miscprots.h farithprots.h 
+follow.o : followprots.h 
+g0a.o : hdr.h vars.h gvars.h gutilprots.h dbxprots.h setprots.h arithprots.h miscprots.h smiscprots.h g0aprots.h 
+gen.o : hdr.h vars.h gvars.h ops.h segment.h slot.h attr.h genop.h opdescprots.h segmentprots.h gpredefprots.h peepprots.h setprots.h miscprots.h gmiscprots.h smiscprots.h genprots.h 
+ginter.o : hdr.h libhdr.h vars.h segment.h gvars.h ops.h type.h ifile.h setprots.h libprots.h miscprots.h bmainprots.h ginterprots.h 
+glib.o : hdr.h libhdr.h vars.h segment.h gvars.h ops.h type.h ifile.h segmentprots.h gutilprots.h setprots.h axqrprots.h libprots.h libfprots.h miscprots.h glibprots.h 
+gmain.o : hdr.h vars.h gvars.h libhdr.h segment.h ifile.h dbxprots.h packprots.h g0aprots.h dclmapprots.h arithprots.h axqrprots.h axqwprots.h genprots.h segmentprots.h expandprots.h procprots.h libprots.h libfprots.h librprots.h libwprots.h readprots.h setprots.h initprots.h glibprots.h gutilprots.h miscprots.h gmiscprots.h gmainprots.h 
+gmisc.o : hdr.h vars.h segment.h gvars.h ops.h slot.h dbxprots.h exprprots.h setprots.h genprots.h gmainprots.h segmentprots.h arithprots.h libprots.h gutilprots.h initprots.h miscprots.h smiscprots.h gmiscprots.h 
+gnodes.o : hdr.h vars.h gvars.h chapprots.h gmiscprots.h dbxprots.h setprots.h miscprots.h smiscprots.h chapprots.h gutilprots.h gnodesprots.h 
+gpredef.o : config.h miscprots.h gpredefprots.h 
+gutil.o : hdr.h vars.h segment.h gvars.h setprots.h segmentprots.h dbxprots.h miscprots.h gmiscprots.h smiscprots.h gutilprots.h 
+gvars.o : hdr.h 
+ilist.o : config.h int.h ivars.h intaprots.h opnameprots.h ilistprots.h 
+imain.o : config.h ivars.h slot.h ifile.h intaprots.h loadprots.h miscprots.h libfprots.h 
+imisc.o : ipredef.h time.h imiscprots.h 
+init.o : hdr.h vars.h gvars.h libhdr.h segment.h slot.h ifile.h readprots.h setprots.h genprots.h miscprots.h smiscprots.h arithprots.h axqrprots.h initprots.h 
+initobj.o : hdr.h vars.h gvars.h attr.h setprots.h gutilprots.h gmiscprots.h smiscprots.h gnodesprots.h initobjprots.h 
+inta.o : config.h int.h ivars.h farithprots.h predefprots.h machineprots.h taskingprots.h imiscprots.h intbprots.h intcprots.h intaprots.h 
+intb.o : config.h int.h ivars.h machineprots.h farithprots.h taskingprots.h predefprots.h intcprots.h intbprots.h 
+intc.o : config.h int.h ivars.h machineprots.h farithprots.h intaprots.h intbprots.h intcprots.h 
+ipar.o : ipar.h int.h iparprots.h 
+ivars.o : config.h int.h 
+lang.o : hdr.h libhdr.h vars.h gvars.h attr.h setprots.h gutilprots.h miscprots.h gmiscprots.h gmainprots.h langprots.h 
+lib.o : hdr.h vars.h libhdr.h ifile.h dbxprots.h miscprots.h smiscprots.h setprots.h libfprots.h librprots.h libprots.h 
+libf.o : config.h ifile.h miscprots.h libfprots.h 
+libr.o : hdr.h vars.h libhdr.h ifile.h dbxprots.h chapprots.h arithprots.h dclmapprots.h miscprots.h smiscprots.h setprots.h libfprots.h libprots.h librprots.h 
+libw.o : hdr.h vars.h libhdr.h ifile.h setprots.h dbxprots.h miscprots.h smiscprots.h chapprots.h libprots.h libfprots.h libwprots.h 
+load.o : config.h int.h segment.h slot.h ivars.h ifile.h miscprots.h libfprots.h axqrprots.h loadprots.h 
+lookup.o : lookupprots.h 
+machine.o : config.h machineprots.h 
+maincase.o : hdr.h vars.h gvars.h ops.h segment.h dbxprots.h namprots.h procprots.h exprprots.h setprots.h genprots.h statprots.h miscprots.h gmiscprots.h smiscprots.h segmentprots.h declprots.h typeprots.h packprots.h gutilprots.h axqrprots.h sepprots.h maincaseprots.h 
+makecorr.o : hdr.h ada.h adalexprots.h pspansprots.h prsutilprots.h errsprots.h lookupprots.h recoverprots.h makecorrprots.h 
+misc.o : config.h time.h ifile.h miscprots.h 
+nam.o : hdr.h vars.h gvars.h ops.h segment.h setprots.h genprots.h smiscprots.h exprprots.h maincaseprots.h gmiscprots.h gutilprots.h namprots.h 
+nodes.o : hdr.h vars.h setprots.h nodesprots.h miscprots.h smiscprots.h sspansprots.h chapprots.h 
+opdesc.o : hdr.h vars.h gvars.h opdescprots.h 
+opname.o : opnameprots.h 
+pack.o : hdr.h libhdr.h vars.h segment.h gvars.h ops.h type.h setprots.h statprots.h procprots.h miscprots.h maincaseprots.h genprots.h gutilprots.h gmiscprots.h libprots.h segmentprots.h smiscprots.h packprots.h 
+peep.o : hdr.h vars.h gvars.h ops.h genop.h genprots.h peepprots.h 
+ppredef.o : config.h predef.h miscprots.h ppredefprots.h 
+predef1.o : ipredef.h intbprots.h intcprots.h predefprots.h 
+predef2.o : ipredef.h time.h intbprots.h intcprots.h predefprots.h 
+predef3.o : ipredef.h intcprots.h predefprots.h 
+predef4.o : ipredef.h miscprots.h predefprots.h 
+predef5.o : ipredef.h machineprots.h predefprots.h 
+predef6.o : ipredef.h 
+proc.o : hdr.h libhdr.h vars.h segment.h gvars.h ops.h type.h axqrprots.h namprots.h maincaseprots.h exprprots.h dbxprots.h miscprots.h libprots.h statprots.h setprots.h genprots.h segmentprots.h gmiscprots.h smiscprots.h gutilprots.h procprots.h 
+prserr.o : hdr.h ada.h adalexprots.h actionprots.h pspansprots.h errsprots.h lookupprots.h prsutilprots.h recoverprots.h makecorrprots.h prserrprots.h 
+prsinit.o : hdr.h ada.h 
+prsutil.o : hdr.h ada.h stdlib.h adalexprots.h miscprots.h smiscprots.h prsutilprots.h 
+pspans.o : hdr.h vars.h ada.h miscprots.h adalexprots.h pspansprots.h 
+read.o : hdr.h libhdr.h vars.h segment.h gvars.h slot.h ifile.h axqrprots.h axqwprots.h libwprots.h gutilprots.h gmiscprots.h gmainprots.h libfprots.h librprots.h setprots.h libprots.h miscprots.h readprots.h 
+recover.o : hdr.h ada.h miscprots.h prsutilprots.h followprots.h actionprots.h lookupprots.h pspansprots.h adalexprots.h errsprots.h recoverprots.h 
+reduce.o : hdr.h ada.h adared.h setprots.h smiscprots.h prsutilprots.h errsprots.h adalexprots.h pspansprots.h reduceprots.h 
+segment.o : hdr.h vars.h gvars.h type.h segment.h miscprots.h dbxprots.h axqrprots.h gmiscprots.h segmentprots.h 
+sep.o : hdr.h ifile.h slot.h libhdr.h vars.h gvars.h ops.h type.h segment.h setprots.h axqrprots.h genprots.h gutilprots.h segmentprots.h readprots.h gmiscprots.h libprots.h sepprots.h 
+set.o : config.h set.h miscprots.h setprots.h 
+shift.o : 
+smisc.o : hdr.h vars.h setprots.h dbxprots.h arithprots.h chapprots.h dclmapprots.h miscprots.h smiscprots.h 
+sspans.o : hdr.h vars.h miscprots.h setprots.h smiscprots.h sspansprots.h 
+stat.o : hdr.h vars.h gvars.h ops.h segment.h setprots.h genprots.h exprprots.h namprots.h procprots.h maincaseprots.h miscprots.h gmiscprots.h gutilprots.h statprots.h 
+tasking.o : config.h ipar.h ivars.h int.h tasking.h segment.h iparprots.h intaprots.h intbprots.h intcprots.h miscprots.h taskingprots.h 
+type.o : hdr.h vars.h segment.h gvars.h attr.h ops.h type.h axqrprots.h setprots.h dbxprots.h initobjprots.h maincaseprots.h gmainprots.h arithprots.h segmentprots.h genprots.h exprprots.h gutilprots.h arithprots.h genprots.h miscprots.h gmiscprots.h smiscprots.h statprots.h typeprots.h 
+units.o : hdr.h vars.h unitsprots.h 
+util.o : hdr.h vars.h arithprots.h miscprots.h smiscprots.h utilprots.h 
+vars.o : hdr.h 
+3.h : hdr.h vars.h 
+	[ -f 3.h ] && touch 3.h
+4.h : hdr.h libhdr.h vars.h 
+	[ -f 4.h ] && touch 4.h
+ada.h : config.h constant.h 
+	[ -f ada.h ] && touch ada.h
+adalex.h : ada.h 
+	[ -f adalex.h ] && touch adalex.h
+axqrprots.h : ifile.h slot.h 
+	[ -f axqrprots.h ] && touch axqrprots.h
+genprots.h : genop.h 
+	[ -f genprots.h ] && touch genprots.h
+gmiscprots.h : segment.h 
+	[ -f gmiscprots.h ] && touch gmiscprots.h
+gutilprots.h : segment.h 
+	[ -f gutilprots.h ] && touch gutilprots.h
+gvars.h : gvars.ch
+hdr.h : hdr.vbs
+hdr.vbs : config.h arith.h symbol.h ghdr.h 
+	[ -f hdr.vbs ] && touch hdr.vbs
+int.h : attr.h ops.h type.h 
+	[ -f int.h ] && touch int.h
+ipredef.h : config.h int.h predef.h ivars.h 
+	[ -f ipredef.h ] && touch ipredef.h
+ivars.h : ivars.ch
+libhdr.h : libhdr.vbs
+libprots.h : libhdr.h ifile.h 
+	[ -f libprots.h ] && touch libprots.h
+miscprots.h : ifile.h 
+	[ -f miscprots.h ] && touch miscprots.h
+vars.h : vars.ch
+ghdr.h : ghdr.vbs
+symbol.h : set.h 
+	[ -f symbol.h ] && touch symbol.h

@@ -1,0 +1,184 @@
+  1. 2/19/92  Brian de Alwis (bsdealwi@descartes.waterloo.edu)
+     problem detecting proper end-of-file condition from keyboard
+     (funny interaction with non-Ada I/O)
+     (bug01.ada)
+     Fixed B. Banner
+
+  2. 2/24/92 Richard Pattis (pattis@cs.washington.edu)
+     problem with renaming package 
+     (bug02.ada)
+     Fixed E. Schonberg & B. Banner 
+
+  3. 2/25/92 Pascal Obry (obry@flash.bellcore.com)
+     Error message not issued when prefix of attribute LARGE is a variable 
+     instead of a type. Instead incorrect processing takes place.
+     (bug03.ada)
+     Fixed B. Banner
+
+  4. 2/26/92 Pascal Obry (obry@flash.bellcore.com)
+     error in separate compilation involving a generic package P that 
+     its instantiation using separate compilation.
+     (bug04.ada)
+     Fixed G. Schenker (not checked in yet)
+
+  5. 3/13/92 Gariel Goodman (goodmang@lab.ultra.nyu.edu)
+     use of subtype as a discriminant in a generic package causes "relay set" 
+     error message.
+     (bug05.ada)
+     Fixed G. Schenker (not checked in yet)
+
+  6. 2/28/92 Wolfgang Polak (happy!wp@kestrel.edu)
+     error in defining subtype of a private type defined in another compilation
+     unit when both are in  separate files. Causes chaos in get_left_span.
+     (bug06a.ada, bug06b.ada)
+     Fixed G. Schenker (not checked in yet)
+     
+  7. 2/28/92 Wolfgang Polak (happy!wp@kestrel.edu)
+     Withing a package which derives a private type (whose full type is 
+     an access to record type) given in another unit causes problems when 
+     all 3 units are in separate files. It compiles, ok if all the units
+     are compiled in the same file.
+     (bug07a.ada, bug07b.ada, bug07c.ada)
+     Fixed B. Banner
+     
+  8. 3/06/92 Pascal Obry (obry@flash.bellcore.com)
+     Failure to deallocate local variables after procedure exit.
+     (This is a feature of Ada/Ed's storage management not an Ada bug per se)
+     (bug08.ada)
+
+  9. 4/01/92 Laurent Bardet (bardet@cs.nyu.edu)
+     TASKING_ERROR is not raised when an entry call is made to a 
+     completed task.
+     (bug09.ada)
+     Fixed by L. Bardet
+
+ 10. 4/03/92 Eric Jensen (jensen@selway.umt.edu)
+     chaos raised when using parenthesis in a slice
+     example: STR((aft)..3) := S(1..3);
+     (bug10.ada)
+     Fixed B. Banner 
+
+ 11. 4/06/92 Mike Feldman (mfeldman@cs.washington.edu)
+     Incorrect transitive visibility of withed packages
+     (bug11.ada)
+     Fixed G. Schenker (not checked in yet)
+
+ 12. 4/20/92 Pascal Obry (obry@flash.bellcore.com)
+     error in indexing the result of integer'image of a variable
+     example: c := integer'image(j)(2);
+     (bug12.ada)
+
+ 13. 4/29/92 Mike Feldman (mfeldman@cs.washington.edu)
+     Failure to detect error in having a conversion on the left 
+     hand side of an assignment leading to failure in code generator.
+     example: Float (Tot_Tax) := Taxable_Income;
+     (bug13.ada)
+     Fixed G. Schenker (not checked in yet)
+
+ 14. 4/29/92 Mike Feldman (mfeldman@cs.washington.edu)
+     parser loops on syntax error involving an else clause 
+     with a condition.
+     (bug14.ada)
+     Fixed G. Schenker (not checked in yet)
+
+ 15. 4/09/92 David Rosenfeld (davidr@asp.camb.inmet.com)
+     problem with renaming package. similar to bug02 reported 
+     by Richard Pattis
+     (bug15.ada)
+     Fixed E. Schonberg & B. Banner
+
+ 16. 3/26/92 Stuart Weinstein (stuartw@cs.umd.edu)
+     use of subtype as a discriminant in a generic package causes 
+     a "relay set" error message. similar to bug 05 reported 
+     by Gariel Goodman
+     (bug16.ada)
+     Fixed G. Schenker (not checked in yet)
+
+ 17. 4/21/92 Mark Culp (mark@array.com)
+     (bug17a.ada, bug17b.ada)
+     Instantiation of nested generic subprogram causes problem when 
+     compiled in separate files.
+     Fixed G. Schenker (not checked in yet)
+
+ 18. 4/21/92 Mark Culp (mark@array.com)
+     problem detecting proper end-of-file condition from keyboard
+     (funny interaction with non-Ada I/O)
+     same as bug01 reported by Brian de Alwis.
+     (bug18.ada)
+     Fixed B. Banner
+
+
+ 19. 4/23/92 Mike Feldman (mfeldman@cs.washington.edu)
+     An error message is incorrectly issued for an instantiation 
+     of a generic package using named associations when there is a 
+     generic formal subprogram with the same name as a subprogram 
+     declared inside the generic spec. The error message issued 
+     relates to the rule in Ada LRM 12.3(3) which forbids named 
+     association where there are 2 or more formal subprograms with 
+     the same designator.
+     (bug19.ada)
+     Fixed B. Banner
+
+ 20. date and author unknown:
+     leaving out full type declaration for a private type causes 
+     the message "chaos: get_left_span: cannot find spans" to occur.
+     (bug20.ada)
+     Fixed G. Schenker (not checked in yet)
+
+ 21. 5/92 Mike Feldman (mfeldman@cs.washington.edu)
+     Subtype of private type in another package causes get_left_span 
+     errors.
+     (bug21.ada)
+     Fixed G. Schenker (not checked in yet)
+ 
+ 22. 5/14/92 Steven J. Zeil (zeil@cs.odu.edu)
+     Incorrect processing of 'RANGE applied to string constant in 
+     another package (different errors whether in the same file or
+     in two separate files)
+     (bug22.ada) 		-- single file compilation
+     (bug22a.ada, bug22b.ada) 	-- two file compilation
+
+ 23. 5/25/92 Mike Feldman (mfeldman@cs.washington.edu)
+     Crash when attempt to reference a field of a private type.
+     Ex: WHEN Calendar.Time.Error =>
+     (bug23.ada)
+     Fixed B. Banner
+
+ 24. 5/27/92 Laurent Bardet (bardet@cs.nyu.edu)
+     Unable to handle missing declaration for a bound given in the
+     discrete_range of a loop_parameter_specification, array type 
+     definitions and entry families.
+     Ex: for I in 1..N loop                 -- missing declaration for N
+     EX: type ARY is array (1..N) of FLOAT; -- missing declaration for N
+     (bug24.ada)
+     Fixed B. Banner
+
+ 25. 5/28/92 Bernard Banner (banner@cs.nyu.edu)
+     variation on bug23.ada reported by Mike Feldman.
+     Crash when a reference to a parameterless function as part of a 
+     name in an exception handler.
+     (bug25.ada)
+     Fixed B. Banner
+
+ 26. Keith Thompson (kst@flash.telesoft.com) relayed by Mike Feldman
+     Reference to Unix in the DOS documention for Ada/Ed in the 
+     appendix F section of the readme.
+     Fixed B. Banner
+
+ 27. 6/18/92 Pascal Obry (obry@flash.bellcore.com)
+     (bug27.ada)
+
+     Integer'image produces stranges on integer'first.
+     Fixed B. Banner
+
+ 28. 7/01/92 Bernard Banner (banner@cs.nyu.edu)
+
+     adacomp does not report the number of errors to stdout when a
+     program that has errors is compiled.
+     Fixed B. Banner
+    
+ 29. 6/15/92 Pascal Obry (obry@flash.bellcore.com)
+     (bug29.ada)
+ 
+     Problem with discriminated record with default value
+

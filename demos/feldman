@@ -1,0 +1,411 @@
+#! /bin/sh
+# This is a shell archive.  Remove anything before this line, then unpack
+# it by saving it into a file and typing "sh file".  To overwrite existing
+# files, type "sh file -c".  You can also feed this as standard input via
+# unshar, or by typing "sh <file", e.g..  If this archive is complete, you
+# will see the following message at the end:
+#		"End of shell archive."
+# Contents:  math.c math.ads math.adb prog24.ada prog73.ada
+# Wrapped by mfeldman@gwusun on Sat Aug 29 21:24:19 1992
+PATH=/bin:/usr/bin:/usr/ucb ; export PATH
+if test -f 'math.c' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'math.c'\"
+else
+echo shar: Extracting \"'math.c'\" \(1474 characters\)
+sed "s/^X//" >'math.c' <<'END_OF_FILE'
+X#include <math.h>
+X
+X/* C functions to accommodate interfacing AdaEd to Ultrix math library */
+X/* The extra layer is needed because AdaEd handles only 32-bit float   */
+X/* and the Ultrix library handles only 64-bit float.                   */
+X/* Written by Michael B. Feldman, The George Washington University     */ 
+X/* May 1992.                                                           */
+X
+Xfloat my_sin(x)
+Xfloat x;
+X{
+X  return ((float) sin((double) x));
+X}
+X
+Xfloat my_cos(x)
+Xfloat x;
+X{
+X  return ((float) cos((double) x));
+X}
+X
+Xfloat my_tan(x)
+Xfloat x;
+X{
+X  return ((float) tan((double) x));
+X}
+X
+Xfloat my_sinh(x)
+Xfloat x;
+X{
+X  return ((float) sinh((double) x));
+X}
+X
+Xfloat my_cosh(x)
+Xfloat x;
+X{
+X  return ((float) cosh((double) x));
+X}
+X
+Xfloat my_tanh(x)
+Xfloat x;
+X{
+X  return ((float) tanh((double) x));
+X}
+X
+Xfloat my_asin(x)
+Xfloat x;
+X{
+X  return ((float) asin((double) x));
+X}
+X
+Xfloat my_acos(x)
+Xfloat x;
+X{
+X  return ((float) acos((double) x));
+X}
+X
+Xfloat my_atan(x)
+Xfloat x;
+X{
+X  return ((float) atan((double) x));
+X}
+X
+Xfloat my_asinh(x)
+Xfloat x;
+X{
+X  return ((float) asinh((double) x));
+X}
+X
+Xfloat my_acosh(x)
+Xfloat x;
+X{
+X  return ((float) acosh((double) x));
+X}
+X
+Xfloat my_atanh(x)
+Xfloat x;
+X{
+X  return ((float) atanh((double) x));
+X}
+X
+Xfloat my_exp(x)
+Xfloat x;
+X{
+X  return ((float) exp((double) x));
+X}
+X
+Xfloat my_log(x)
+Xfloat x;
+X{
+X  return ((float) log((double) x));
+X}
+X
+Xfloat my_sqrt(x)
+Xfloat x;
+X{
+X  return ((float) sqrt((double) x));
+X}
+X
+Xfloat my_cbrt(x)
+Xfloat x;
+X{
+X  return ((float) cbrt((double) x));
+X}
+END_OF_FILE
+if test 1474 -ne `wc -c <'math.c'`; then
+    echo shar: \"'math.c'\" unpacked with wrong size!
+fi
+# end of 'math.c'
+fi
+if test -f 'math.ads' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'math.ads'\"
+else
+echo shar: Extracting \"'math.ads'\" \(1130 characters\)
+sed "s/^X//" >'math.ads' <<'END_OF_FILE'
+XPACKAGE Math IS
+X
+X   -- specification for math functions to be used with AdaEd.
+X   -- see package body for usage guidelines.
+X
+X   -- written by Michael B. Feldman, The George Washington University
+X   -- May 1992.
+X
+X   -- Transcendentals
+X
+X  FUNCTION  Sin (X : Float) RETURN Float;
+X  FUNCTION  Cos (X : Float) RETURN Float;
+X  FUNCTION  Tan (X : Float) RETURN Float;
+X
+X   -- Hyperbolic functions
+X
+X  FUNCTION  Sinh (X : Float) RETURN Float;
+X  FUNCTION  Cosh (X : Float) RETURN Float;
+X  FUNCTION  Tanh (X : Float) RETURN Float;
+X
+X   -- Arc functions
+X
+X  FUNCTION  Asin (X : Float) RETURN Float;
+X  FUNCTION  Acos (X : Float) RETURN Float;
+X  FUNCTION  Atan (X : Float) RETURN Float;
+X
+X   -- Hyerbolic Arc functions
+X
+X  FUNCTION  Asinh (X : Float) RETURN Float;
+X  FUNCTION  Acosh (X : Float) RETURN Float;
+X  FUNCTION  Atanh (X : Float) RETURN Float;
+X
+X   -- Logarithms
+X
+X  FUNCTION  Exp (X : Float) RETURN Float;      -- e raised to the x power
+X  FUNCTION  Log (X : Float) RETURN Float;      -- Log x base 10
+X
+X   -- Roots
+X
+X  FUNCTION  Sqrt (X : Float) RETURN Float; -- Square root
+X  FUNCTION  Cbrt (X : Float) RETURN Float; -- Cube root
+X
+XEND Math;
+END_OF_FILE
+if test 1130 -ne `wc -c <'math.ads'`; then
+    echo shar: \"'math.ads'\" unpacked with wrong size!
+fi
+# end of 'math.ads'
+fi
+if test -f 'math.adb' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'math.adb'\"
+else
+echo shar: Extracting \"'math.adb'\" \(3936 characters\)
+sed "s/^X//" >'math.adb' <<'END_OF_FILE'
+XPACKAGE BODY math IS
+X
+X  -- body of Math function package, which interfaces to the Ultrix
+X  -- math library. Normally we could interface our Ada math functions
+X  -- directly to the corresponding C functions, but this is not possible
+X  -- because the C functions deal only with double-precision float
+X  -- quantities and AdaEd deals only with single-precision currently.
+X  -- For a number of reasons, the coercion between precisions can be
+X  -- done only on the C side of the interface. Hence the extra layer
+X  -- of Ada functions: my_sin, etc., which interface directly to an
+X  -- extra layer of C functions contained in math.c.
+X
+X  -- To use this interface package, you must
+X  -- 1. cc -c math.c   
+X  -- 2. adacomp -l <your AdaEd library> math.ads
+X  -- 3. adacomp -l <your AdaEd library> math.adb
+X
+X  -- Assuming a client programs called UsesMath has been compiled as usual,
+X  -- bind it with
+X  -- adabind -i math.o -m usesmath <your library name>
+X
+X  -- NOTE: this will cause a rather large entry to be placed in your AdaEd
+X  -- library, because AdaEd's interface to C requires that part of the AdaEd 
+X  -- interpreter be linked in.
+X
+X  -- written by Michael B. Feldman, The George Washington University
+X  -- May 1992
+X
+X  FUNCTION  my_sin (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_sin);
+X
+X  FUNCTION  Sin (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_sin (X);
+X  END Sin;
+X
+X  FUNCTION  my_cos (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_cos);
+X
+X  FUNCTION  Cos (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_cos (X);
+X  END Cos;
+X
+X  FUNCTION  my_tan (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_tan);
+X
+X  FUNCTION  Tan (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_tan (X);
+X  END Tan;
+X
+X  FUNCTION  my_sinh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_sinh);
+X
+X  FUNCTION  Sinh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_sinh (X);
+X  END Sinh;
+X
+X  FUNCTION  my_cosh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_cosh);
+X
+X  FUNCTION  Cosh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_cosh (X);
+X  END Cosh;
+X
+X  FUNCTION  my_tanh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_tanh);
+X
+X  FUNCTION  Tanh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_tanh (X);
+X  END Tanh;
+X
+X  FUNCTION  my_asin (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_asin);
+X
+X  FUNCTION  Asin (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_asin (X);
+X  END Asin;
+X
+X  FUNCTION  my_acos (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_acos);
+X
+X  FUNCTION  Acos (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_acos (X);
+X  END Acos;
+X
+X  FUNCTION  my_atan (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_atan);
+X
+X  FUNCTION  Atan (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_atan (X);
+X  END Atan;
+X
+X  FUNCTION  my_asinh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_asinh);
+X
+X  FUNCTION  Asinh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_asinh (X);
+X  END Asinh;
+X
+X  FUNCTION  my_acosh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_acosh);
+X
+X  FUNCTION  Acosh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_acosh (X);
+X  END Acosh;
+X
+X  FUNCTION  my_atanh (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_atanh);
+X
+X  FUNCTION  Atanh (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_atanh (X);
+X  END Atanh;
+X
+X  FUNCTION  my_exp (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_exp);
+X
+X  FUNCTION  Exp (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_exp (X);
+X  END Exp;
+X
+X  FUNCTION  my_log (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_log);
+X
+X  FUNCTION  Log (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_log (X);
+X  END Log;
+X
+X  FUNCTION  my_sqrt (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_sqrt);
+X
+X  FUNCTION  Sqrt (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_sqrt (X);
+X  END Sqrt;
+X
+X  FUNCTION  my_cbrt (X : Float) RETURN Float;
+X  PRAGMA interface (c, my_cbrt);
+X
+X  FUNCTION  Cbrt (X : Float) RETURN Float IS
+X  BEGIN
+X    RETURN my_cbrt (X);
+X  END Cbrt;
+X
+XEND Math;
+END_OF_FILE
+if test 3936 -ne `wc -c <'math.adb'`; then
+    echo shar: \"'math.adb'\" unpacked with wrong size!
+fi
+# end of 'math.adb'
+fi
+if test -f 'prog24.ada' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'prog24.ada'\"
+else
+echo shar: Extracting \"'prog24.ada'\" \(261 characters\)
+sed "s/^X//" >'prog24.ada' <<'END_OF_FILE'
+X-- Precompiled instantiations of Integer_IO and
+X-- Float_IO for the predefined Integer and Float types
+X 
+XWITH Text_IO;
+XPACKAGE My_Int_IO IS
+X  NEW Text_IO.Integer_IO (Num => Integer);
+X 
+XWITH Text_IO;
+XPACKAGE My_Flt_IO IS
+X  NEW Text_IO.Float_IO   (Num => Float);
+END_OF_FILE
+if test 261 -ne `wc -c <'prog24.ada'`; then
+    echo shar: \"'prog24.ada'\" unpacked with wrong size!
+fi
+# end of 'prog24.ada'
+fi
+if test -f 'prog73.ada' -a "${1}" != "-c" ; then 
+  echo shar: Will not clobber existing file \"'prog73.ada'\"
+else
+echo shar: Extracting \"'prog73.ada'\" \(748 characters\)
+sed "s/^X//" >'prog73.ada' <<'END_OF_FILE'
+XWITH Text_IO;
+XWITH My_Int_IO;
+XWITH My_Flt_IO;
+XWITH Math;
+XPROCEDURE SquareRoots IS
+X
+X -- Illustrates the square root function provided by Math
+X
+X  MaxNumber : CONSTANT Positive := 20;
+X  FltNum    : Float;
+X
+XBEGIN  -- SquareRoots   
+X
+X  Text_IO.Put (Item => "Number  Square Root");
+X  Text_IO.New_Line;
+X  Text_IO.Put (Item => "------  -----------");
+X  Text_IO.New_Line;
+X
+X  FltNum := 1.0;
+X  FOR Number IN 1..MaxNumber LOOP
+X    My_Int_IO.Put (Item => Number, Width => 3);
+X    My_Flt_IO.Put (Item => Math.Sqrt (Float(Number)), 
+X                   Fore => 7, Aft => 5, Exp => 0);
+X    My_Flt_IO.Put (Item => Math.Sqrt (FltNum), 
+X                   Fore => 7, Aft => 5, Exp => 0);
+X    Text_IO.New_Line;
+X    FltNum := FltNum + 1.0;
+X  END LOOP;
+X
+XEND SquareRoots;
+END_OF_FILE
+if test 748 -ne `wc -c <'prog73.ada'`; then
+    echo shar: \"'prog73.ada'\" unpacked with wrong size!
+fi
+# end of 'prog73.ada'
+fi
+echo shar: End of shell archive.
+exit 0
+

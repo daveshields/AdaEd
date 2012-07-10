@@ -1,0 +1,65 @@
+
+# This is a shell script version of gethdrs (the original was a trivial
+#  lex program).  This program extracts the names of the local (named
+#  using "name.h" instead of <name.h>) .h files included in source files.
+#  The major part of the work here is removing comments.  No consideration
+#  is given to the effects of preprocessor directives (e.g. #if - #endif
+#  blocks will not skip over #include lines) or strange things like
+#  "/*" appearing in a string literal.  I.e. the isolation of relevant
+#  #include directives is rather meager - but seems to be effective
+#  enough for now (the lack of handling of #if - #endif is annoying
+#  but tentative removal of include files seems to be done by commenting
+#  out).
+#
+# The script takes the source from standard input and writes to standard
+#  out.
+#
+# The script consists of a pipeline of two sed programs followed by
+#  a few shell commands.  The first sed program removes the comments
+#  (two sed programs were used because the finally decommented line
+#  could occur at two points and it was easier [if not necesary] to
+#  print the line right away, than to save it up for more processing),
+#  while the second isolates the included files' names and outputs them.
+#  The remainder puts all of these names onto one line with no terminating
+#  newline as wanted elsewhere (the program o2hdeps).
+
+sed -n -e '
+: restart
+!c\
+Loop to remove contents of comment on single line leaving /**/-s
+: rm
+s+\(/\*\)[^*][^*]*+\1+g
+s+/\*\*\([^/]\)+/*\1+g
+t rm
+!c\
+Remove /**/-s then reset substitution-made flag
+s+/\*\*/+ +g
+t next
+: next
+
+!c\
+On line containing start of comment block delete start of comment\
+and branch to remove remainder of block
+s+/\*\**++
+t delblk
+b aftrblk
+: delblk
+p
+: d2
+/\*\//!{
+n
+b d2
+}
+s+^+/*+
+b restart
+
+:aftrblk
+p' | sed -n -e '
+/#include[ 	]*"/{
+s/^[^"]*"//
+s/".*//
+p
+}' | while read hname
+do
+echo -n "$hname "
+done

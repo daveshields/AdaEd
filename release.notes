@@ -1,0 +1,86 @@
+  Release notes for Ada/Ed-C 1.11.2 Sept 30, 1992
+
+- Fixes for most bugs reported (see bug.log and bugs directory)
+
+- A new round-robin option for tasking (currently the only method is a
+  run until blocked scheduling model) (see -r option on adaexec)
+  plus an additional tasking trace option. (see the -ts option of adaexec)
+
+- Config information built in for additional machines.
+  The config.h now contains entries to support the following machines. 
+
+  See the special notes in the README file for additional changes 
+  necessary to compile for the following targets.
+
+  Silicon Graphics IRIS running IRIX
+  Sun3 running SunOS
+  Sun Sparcstation running SunOS
+  RS6000/AIX 
+  Decstation running ULTRIX
+  VAX running BSD 4.3 UNIX
+  386/DOS machines (with at least 2 megabytes of RAM)
+
+- Changes to options for adabind, adaexec and adalib.
+  To make the way a Ada program library is specified more consistent for
+  all the phases, the "-l" has been added to adabind, adaexec and adalib
+  as the way of specifying the library file instead of as the last argument
+  on the command line. For backwards compatibilty the old way of specifying
+  a library will be kept but not documented.
+
+- Inclusion of a directory of demo programs. These include some of the
+  prior release of the PC version of Ada/Ed-C verison 1.7 and also
+  demos from the release of the original SETL version of Ada/Ed from 1983.
+  Also include is Mike Feldman's portable dining philopshopers program.
+  A readme and scripts to run the programs are included.
+
+- Removal of warnings when building predef. 
+  The useless messages pretaining to the node and symbol count for the
+  predefined units have all been suppressed.
+
+- Note: programs must be recompiled from the previous version of Adaed-C
+  due to incompatibilites of format.
+
+- For 386/DOS version:
+
+   - The options to Ada/Ed are now case insensitive (for DOS version only).
+
+   - Ada/Ed-C should now be compatible with the following DOS memory managers 
+     and operating environments:
+
+     Qualitas 386MAX V6.0/V6.01d
+     DOS 5.0's EMM386
+     DOS 5.0 DOS=HIGH
+     Quarterdeck's QEMM-386 V6.00 and higher
+     Helix Software's NETROOM V2.2
+
+   - DASC (Dewar's Advanced Syntax Checker) is now distributed with the DOS
+     version.
+
+   - Ada/Ed-C (DOS version) was compiled with the INTEL 386/486 Code Builder C 
+     compiler.  The executables for Ada/Ed-C are provided so there is no need
+     to compile the sources.
+
+  Special Thanks for Mike Feldman of George Washington University for his
+  numerous suggestions and bug reports and his promoting of Ada/Ed-C.
+
+  Thanks also for all those that contributed bugs reports, suggestions
+  and porting information. In alphabetical order, they are:
+ 
+  Brian de Alwis
+  Laurent Bardet
+  Mark Culp
+  Rolf Ebert
+  Ed Ferguson
+  Gabriel Goodman
+  Eric Jensen
+  Arthur Vargas Lopes
+  Pascal Obry
+  Richard O'Keefe
+  Richard Pattis
+  Wolfgang Polak
+  David Rosenfeld
+  Satnam Singh
+  Keith Thompson
+  Stuart Weinstein
+  Steve Zeil
+  and any other people who I might have left out

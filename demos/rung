@@ -1,0 +1,6 @@
+adacomp -nl mathlib math.adb
+adacomp -l  mathlib math.ads
+gcc -c math.c
+adacomp -l mathlib roots.ada
+adabind -i math.o -l mathlib
+adaexec -l mathlib

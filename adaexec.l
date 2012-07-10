@@ -1,0 +1,1 @@
+.so manl/adaed.l

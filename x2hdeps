@@ -1,0 +1,112 @@
+
+# This script takes a list of target files and tries to create
+#  a set of dependency rules reflecting the recursive dependence
+#  on .h files.
+#
+# This utility is in no way general purpose and in fact (together
+#  with other utilities - particularly gethdrs) imposes some
+#  restrictions on the code.  It is very tailored to the current
+#  Ada/Ed system.  There are probably better ways to do this -
+#  writing these utilities was expedient.
+#
+# Without the '-c' option the input should be a list of .o files.
+#  With the '-c' option the input should be a list of .c files.
+#
+# Some rules it uses for finding the dependencies are:
+#
+#           TO BE FILLED IN
+#
+#
+# Note that by using 'basename', an argument will only pass if
+#  it has no directory prefix.  Besides being simpler, this might
+#  be less confusing since the .o files should be built in the same
+#  directory containing the sources for pathnames in the headers to
+#  make sense.
+#
+
+if [ "$1" = -c ]; then
+	ext=.c
+	shift
+else
+	ext=.o
+fi
+if [ $# -lt  1 ]; then
+	echo usage: x2hdeps [-c] filename...
+	exit 1
+fi
+
+# These names should be safe as temporary file names
+tmpname=o2hdeps-tn$$
+complist=o2hdeps-cl$$
+addlist=o2hdeps-al$$
+cat </dev/null >$tmpname
+cat </dev/null >$complist
+
+while [ $# != 0 ]
+do
+	bname=`basename $1 $ext`
+	if [ $1 = $bname$ext ] ; then echo $bname; fi
+	shift
+done | sort | uniq | while read bname
+do
+	wrkname=$bname.c
+	rcsname=$wrkname,v
+	if [ -r $wrkname ]
+	then
+		echo  -n "$bname$ext : " >>$tmpname
+		gethdrs <$wrkname >> $tmpname
+	elif [ -r $rcsname -o -r RCS/$rcsname ]
+	then
+		echo  -n "$bname$ext : " >>$tmpname
+		co -q -p $wrkname | gethdrs >> $tmpname
+	fi
+	echo >> $tmpname
+done
+
+while [ X ]
+do
+	if [ ! -s $tmpname ] ; then break; fi;
+	cat $tmpname
+	awk '/^[^	]/ {for (i = 3; i <= NF; i++) printf("%s\n", $i); }' $tmpname|\
+      sort | uniq | comm -23 - $complist  >$addlist
+	if [ ! -s $addlist ] ; then break; fi;
+	sort -m $complist $addlist >$tmpname
+	mv $tmpname $complist
+
+	cat $addlist| while read hfile
+	do
+		deps=""
+		hbase=`basename $hfile .h`
+		if [ $hbase.h != $hfile ]; then continue; fi
+		if [ -r $hbase.vbs ]; then
+			hname=$hbase.vbs
+			echo "$hfile : $hname" >>$tmpname
+			deps=`gethdrs <$hbase.vbs`
+		elif [ -r $hbase.vbs,v -o -r RCS/$hbase.vbs,v ]; then
+			hname=$hbase.vbs
+			echo "$hfile : $hname" >>$tmpname
+			deps=`co -q -p $hbase.vbs | gethdrs`
+		elif [ -r $hbase.ch ]; then
+			hname=$hbase.ch
+			echo "$hfile : $hname" >>$tmpname
+			deps=`makech -h <$hbase.ch | gethdrs`
+		elif [ -r $hbase.ch,v -o -r RCS/$hbase.ch,v ]; then
+			hname=$hbase.ch
+			echo "$hfile : $hname" >>$tmpname
+			deps=`co -q -p $hbase.ch | makech -h | gethdrs`
+		elif [ -r $hfile ]; then
+			hname=$hfile
+			deps=`gethdrs <$hfile`
+		elif [ -r $hfile,v -o -r RCS/$hfile,v ]; then
+			hname=$hfile
+			deps=`co -q -p $hfile | gethdrs`
+		fi
+		if [ "$deps" != "" ] 
+		then
+			echo "$hname : $deps" >>$tmpname
+			echo "	[ -f $hname ] && touch $hname" >>$tmpname
+		fi
+	done
+done
+
+rm -f $tmpname $complist $addlist

@@ -1,0 +1,49 @@
+
+# This is a shell script version of the program which transforms a .ch
+#  file into either a .h file or a .c file.  This is used to create
+#  matching .c and .h files from a common source (the .ch file) where
+#  the .c file contains variable definitions and the .h file contains
+#  corresponding external declarations.  The program is run twice
+#  on a .ch file: once with the "-c" option to create the .c file
+#  and once with the "-h" option to create the .h file (the program
+#  reads from standard input and writes to standard output - the
+#  extensions named here are just the conventional ones).
+#
+# In either case block comments (rather crudely defined - see the cdecom
+#  script which uses the same rules) are first stripped out by the first
+#  half of the pipeline (the first sed command). After the comments are
+#  stripped out the file is filtered according to:
+#    -c option:
+#        >lines starting with 'C' or 'X' are copied with 1st character removed
+#        >lines starting with 'H' are discarded
+#        >all other lines are copied out
+#    -h option:
+#        >lines starting with 'H' are copied with 1st character removed
+#        >lines starting with 'X' are copied with 'X' replaced by 'extern'
+#        >lines starting with 'C' are discarded
+#        >all other lines are copied out
+
+if [ $# -ne 1 -o "$1" != '-c' -a  "$1" != '-h' ]
+then
+    echo "usage: makech -c|-h"
+    exit 1
+fi
+
+sed -e '
+  /^[ 	]*\/\*.*\*\// d
+  /^[ 	]*\/\*/,/\*\// d' | \
+if [ $1 = '-c' ]
+then
+    echo '#define INIT(v) =v '
+    sed -e '
+      /^H/ d
+      s/^X/ /
+      s/^C//'
+elif [ $1 = -h ]
+then
+    echo '#define INIT(v) '
+    sed -e '
+      /^C/ d
+      s/^X/extern  /
+      s/^H//'
+fi

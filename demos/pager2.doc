@@ -1,0 +1,477 @@
+                                     PAGER2
+
+                                by Richard Conn
+
+                  PAGER2 is   a  tool  for  creating  paged  files,
+             extracting  the component files from a paged file, and
+             scanning  paged  files,   where   a  paged  file  is a
+             file  composed  of  one  or  more  files  prefixed  by
+             banners.    PAGER2   is  based  in  concept   on   the
+             UNPAGE   tool submitted to the Ada Software Repository
+             on SIMTEL20 by Mitre Corporation.  
+
+                  Paged files   are   convenient   mechanisms   for
+             storing  related   files.   They   reduce   cluttering
+             in   the  directories  and  simplify the file transfer
+             process  by requiring  the  user  to transfer only one
+             file  in  order  to  obtain  all  files pertinent to a
+             particular  project  or  tool.   Additionally,   paged
+             files   are  text  files  which  can  be  handled more
+             readily  than  the 8-bit binary images associated with
+             other   file   grouping   mechanisms  (see   the  file
+             OILBR.DOC     in   the   directory   PD2:<ADA.GENERAL>
+             in   the   Ada  Software Repository).  Paged files may
+             be  manipulated  by  a  text  editor  if necessary.  
+
+                  For these   reasons,   paged   files   have  been
+             adopted   as   a   standard  for  file  storage in the
+             Ada  Software Repository.  The file type of SRC (as in
+             MYFILE.SRC) indicates that a file is paged.  
+
+
+
+
+          1.  PAGED FILE FORMAT 
+
+               A paged  file  is  a file composed of one or more files
+          prefixed  by banners of the form: 
+
+                          ::::::::::
+                          filename
+                          ::::::::::
+          or
+                          --::::::::::
+                          --filename
+                          --::::::::::
+
+               The first   banner   conforms   to  the  PAGE  standard
+          employed  on  UNIX.  The  second  banner is an adaptation of
+          the  first  form  which  resembles Ada comments.  The second
+          banner  is  convenient   when   the   paged   file  contains
+          several   files   associated  with  a particular Ada program
+          and  they  are  placed  in  the  paged  file  in compilation
+
+
+          Richard Conn                                          Page 1
+
+
+                                     PAGER2
+
+
+          order.   The  resulting  paged  file  may  then  be compiled
+          without being disassembled first.  
+
+
+
+
+          2.  PAGER2 COMMANDS 
+
+               PAGER2 responds to the following commands: 
+
+                1.  PAGE or P - create a paged file 
+
+                2.  UNPAGE  or U - extract the components of a
+                  paged file into their separate files 
+
+                3.  LIST  or  L  -  list components of a paged
+                  file to the screen 
+
+                4.  INCLUDE  or I - list components of a paged
+                  file into an include file 
+
+                5.  HELP or H - print a command summary 
+
+                6.  EXIT or X - exit PAGER2 
+
+               The case  used  to  enter  these  command  verbs is not
+          significant.    The  case  used  to  enter  the  file  names
+          referenced  as arguments to the command verbs is significant
+          if  the  host  operating  system  distinguishes case in file
+          names, as does UNIX (but not MSDOS).  
+
+
+          2.1.  PAGE Command 
+
+               The PAGE  function  is  used  to  created a paged  file
+          from   one  or more component files.  The syntax of the PAGE
+          command is: 
+
+               PAGE [filename | @include_filename]+ paged_file_name
+
+               Two or  more file names may be specified after the PAGE
+          verb.   The  last file name is the name of the paged file to
+          be  created.  The other file names are the names of files to
+          be  placed into the paged file or the names of include files
+          from  which  the  names of files to be placed into the paged
+          file are to be extracted.  
+
+               If the  user prefixes the name of a component file with
+          an   atsign  character  (@), the indicated file is processed
+          as  an  include  file.   An  include  file  is  a file which
+          contains   the   names  of  zero  or  more component  files,
+          one   name   per  line  starting in the first column.  Other
+
+
+          Richard Conn                                          Page 2
+
+
+                                     PAGER2
+
+
+          include  files  may   be   referenced   within   an  include
+          file    by   prefixing   their   names   with   the   atsign
+          character.   Comments  may  be placed within an include file
+          by  placing  two  dashes  in  the   first   two columns of a
+          line.  The following is an example of an include file: 
+
+                   Example                      Comments
+                   =======                      ========
+          --
+          -- This is an include file for        Comment at the beginning
+          --  my favorite tool
+          --
+                                                Blank lines are allowed
+          --
+          -- The following include file
+          --  contains the names of the         Another comment
+          --  Ada source files in compilation
+          --  order
+          --
+          @mytool.cmp
+          --
+          -- The following are the documentation
+          --  files
+          --
+          mytool.ref
+          mytool.doc
+          mytool.idx
+
+               A single  letter  "P"  may be used rather than the full
+          "PAGE"  verb.   An  example  of  the  execution  of the PAGE
+          command is: 
+
+          PAGER2> page
+           PAGE Command requires the name of the paged file and include file
+             Syntax: page [@include_file_name|file_name]+ paged_file_name
+          PAGER2> p @demo.inc demo.src
+           Adding demo.inc -- 8 Lines
+           Adding demo1.txt -- 1 Lines
+           Adding demo2.txt -- 1 Lines
+
+
+          2.2.  UNPAGE Command 
+
+               The UNPAGE  function  extracts  the   components   from
+          the   indicated  paged   file,  leaving  the  original paged
+          file intact.  The syntax of UNPAGE is: 
+
+              UNPAGE paged_filename
+
+               The single  letter "U" may be used rather than the full
+          "UNPAGE"  verb.   An  example of the execution of the UNPAGE
+          command is: 
+
+
+          Richard Conn                                          Page 3
+
+
+                                     PAGER2
+
+
+          PAGER2> unpage
+           UNPAGE Command requires the name of a paged file
+             Syntax: unpage paged_file_name
+          PAGER2> u demo.src
+           Extracting demo.inc -- 8 Lines
+           Extracting demo1.txt -- 1 Lines
+           Extracting demo2.txt -- 1 Lines
+
+
+          2.3.  LIST Command 
+
+               The LIST  function  is  used  to  create  a  text  file
+          containing   the  names   of   the  component files within a
+          paged file.  The syntax of the LIST command is: 
+
+               LIST paged_file_name
+
+               The single  letter "L" may be used rather than the full
+          "LIST"  verb.   An  example  of  the  execution  of the LIST
+          command is: 
+
+          PAGER2> list
+           LIST Command requires the name of a paged file
+             Syntax: list paged_file_name
+          PAGER2> list demo.src
+           demo.inc -- 8 Lines
+           demo1.txt -- 1 Lines
+           demo2.txt -- 1 Lines
+
+
+          2.4.  INCLUDE Command 
+
+               The INCLUDE  command  performs the same function of the
+          LIST  command, but it places the output into an include file
+          which  is  suitable  for  building  a  new  paged file.  Its
+          syntax is: 
+
+              INCLUDE paged_file_name include_file_name
+
+               The single  letter "I" may be used rather than the full
+          "INCLUDE"  verb.  An example of the execution of the INCLUDE
+          command is: 
+
+          PAGER2> include
+           INCLUDE Command requires the name of a paged file
+             Syntax: include paged_file_name output_include_file
+          PAGER2> include demo.src demo2.inc
+           demo.inc -- 8 Lines
+           demo1.txt -- 1 Lines
+           demo2.txt -- 1 Lines
+
+
+
+
+          Richard Conn                                          Page 4
+
+
+                                     PAGER2
+
+
+          2.5.  HELP Command 
+
+               The HELP  command  displays  a brief help text  to  the
+          user.   The syntax of this command is: 
+
+              HELP
+
+               The single  letter "H" may be used rather than the full
+          "HELP" verb.  
+
+
+          2.6.  EXIT Command 
+
+               The EXIT command exits PAGER.  Its syntax is: 
+
+              EXIT
+
+               The single  letter "X" may be used rather than the full
+          "EXIT" verb.  
+
+
+
+
+          3.  INVOKING PAGER2 FROM THE COMMAND LINE 
+
+               PAGER2 may  also  be  run  from  the command line.  The
+          PAGER2  verb  may  be  followed  by  a  conventional  PAGER2
+          command,  in  which  case  the  PAGER2 command alone will be
+          executed  and  then PAGER2 will exit.  In addition, the verb
+          recognized  by  PAGER2 (like HELP or UNPAGE) may be prefixed
+          with  a  dash  (-),  making the syntax of the PAGER2 command
+          line  similar  to  a  conventional  UNIX  command line.  For
+          example,  to  obtain  a  display  of the brief help message,
+          either of these commands may be used: 
+
+              PAGER2 HELP
+              PAGER2 H
+              PAGER2 -H
+              PAGER2 -help
+
+               Likewise, to  create  a  paged file, named MYFILES.SRC,
+          from   the   component   files   FILE1.TXT,  FILE2.TXT,  and
+          FILE3.TXT, a command like the following could be issued: 
+
+              PAGER2 -PAGE FILE1.TXT FILE2.TXT FILE3.TXT MYFILES.SRC
+
+
+
+
+
+
+
+
+
+          Richard Conn                                          Page 5
+
+
+                                     PAGER2
+
+
+          4.  SAMPLE SESSION 
+
+               The following  is  a  sample  PAGER2  session.   It was
+          run  on  a  SUN 3 Model 260 running SunOS 3.5.  
+
+          ifsun0/xanadu> ls -l
+          total 3
+          -rw-r--r--  1 xanadu        166 Jun 16 10:23 demo.inc
+          -rw-r--r--  1 xanadu         23 Jun 16 10:23 demo1.txt
+          -rw-r--r--  1 xanadu         23 Jun 16 10:23 demo2.txt
+
+          ifsun0/xanadu> cat demo.inc
+          -- This is a demonstration of the PAGER2 program
+
+          -- The include file is named DEMO.INC
+          demo.inc
+
+          -- The source files are DEMO1.TXT and DEMO2.TXT
+          demo1.txt
+          demo2.txt
+
+          ifsun0/xanadu> cat demo1.txt
+          This is file DEMO1.TXT
+
+          ifsun0/xanadu> cat demo2.txt
+          This is file DEMO2.TXT
+
+          ifsun0/xanadu> pager2
+          PAGER2, Ada Version 1.1
+          Type 'h' for Help
+
+          PAGER2> page
+           PAGE Command requires the name of the paged file and include file
+             Syntax: page [@includefilename|filename]+ pagedfilename
+
+          PAGER2> p @demo.inc demo.src
+           Adding demo.inc -- 8 Lines
+           Adding demo1.txt -- 1 Lines
+           Adding demo2.txt -- 1 Lines
+
+          PAGER2> list
+           LIST Command requires the name of a paged file
+             Syntax: list pagedfilename
+
+          PAGER2> list demo.src
+           demo.inc -- 8 Lines
+           demo1.txt -- 1 Lines
+           demo2.txt -- 1 Lines
+
+          PAGER2> include
+           INCLUDE Command requires the name of a paged file
+             Syntax: include pagedfilename outputincludefile
+
+
+          Richard Conn                                          Page 6
+
+
+                                     PAGER2
+
+
+
+          PAGER2> include demo.src demo2.inc
+           demo.inc -- 8 Lines
+           demo1.txt -- 1 Lines
+           demo2.txt -- 1 Lines
+
+          PAGER2> x
+
+          ifsun0/xanadu> cat demo.src
+          --::::::::::
+          --demo.inc
+          --::::::::::
+          -- This is a demonstration of the PAGER2 program
+
+          -- The include file is named DEMO.INC
+          demo.inc
+
+          -- The source files are DEMO1.TXT and DEMO2.TXT
+          demo1.txt
+          demo2.txt
+          --::::::::::
+          --demo1.txt
+          --::::::::::
+          This is file DEMO1.TXT
+          --::::::::::
+          --demo2.txt
+          --::::::::::
+          This is file DEMO2.TXT
+
+          ifsun0/xanadu> cat demo2.inc
+          -- Include file for demo.src
+          demo.inc
+          demo1.txt
+          demo2.txt
+
+          ifsun0/xanadu> pager2
+          PAGER2, Ada Version 1.1
+          Type 'h' for Help
+
+          PAGER2> u demo.src
+           Extracting demo.inc -- 8 Lines
+           Extracting demo1.txt -- 1 Lines
+           Extracting demo2.txt -- 1 Lines
+
+          PAGER2> unpage
+           UNPAGE Command requires the name of a paged file
+             Syntax: unpage pagedfilename
+
+          PAGER2> u demo.src
+           Extracting demo.inc -- 8 Lines
+           Extracting demo1.txt -- 1 Lines
+           Extracting demo2.txt -- 1 Lines
+
+
+          Richard Conn                                          Page 7
+
+
+                                     PAGER2
+
+
+
+          PAGER2> x
+          ifsun0/xanadu> ls -l
+          total 5
+          -rw-r--r--  1 xanadu        166 Jun 16 10:26 demo.inc
+          -rw-r--r--  1 xanadu        325 Jun 16 10:25 demo.src
+          -rw-r--r--  1 xanadu         23 Jun 16 10:26 demo1.txt
+          -rw-r--r--  1 xanadu         58 Jun 16 10:25 demo2.inc
+          -rw-r--r--  1 xanadu         23 Jun 16 10:26 demo2.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Richard Conn                                          Page 8
+
+

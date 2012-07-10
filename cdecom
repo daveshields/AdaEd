@@ -1,0 +1,17 @@
+
+# This is a shell script version of the program which transforms a
+#  .vbs file into a .h file.  It simply strips away blocks of commentary
+#  from a verbose version of a header file. It reads from standard
+#  input and writes to standard out.
+#
+# The definition of a block comment is simple-minded and wrong - it
+#  could be dangerous to use this script on sources that aren't
+#  written with it in mind.  The sed script simply removes all lines
+#  between a line that opens a comment after only white space, and
+#  the line containing the matching close of the comment. The
+#  first sed line takes care of the case where the comment is on one
+#  line.
+
+sed -e '
+  /^[ 	]*\/\*.*\*\// d
+  /^[ 	]*\/\*/,/\*\// d' 
